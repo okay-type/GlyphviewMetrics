@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>addToMenu</key>
+	<array/>
+	<key>developer</key>
+	<string>Jackson Showalter-Cavanaugh</string>
+	<key>developerURL</key>
+	<string>okaytype.com</string>
+	<key>html</key>
+	<false/>
+	<key>launchAtStartUp</key>
+	<integer>1</integer>
+	<key>mainScript</key>
+	<string>glyphview-metrics-ui.py</string>
+	<key>name</key>
+	<string>Glyphview Metrics UI</string>
+	<key>requiresVersionMajor</key>
+	<string>3</string>
+	<key>requiresVersionMinor</key>
+	<string>0</string>
+	<key>timeStamp</key>
+	<real>1585763669.5671339</real>
+	<key>version</key>
+	<string>1.0</string>
+</dict>
+</plist>
