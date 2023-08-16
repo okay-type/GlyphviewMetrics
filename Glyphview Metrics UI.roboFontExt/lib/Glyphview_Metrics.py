@@ -21,7 +21,6 @@ uibackground = NSColor.colorWithCalibratedRed_green_blue_alpha_(.8, 1, 1, .4)
 
 '''
 
-modifier + set component left margin -> keep width
 
 valid values
 ---
@@ -50,6 +49,7 @@ thorn.@l        the things above things stack, useful if you can remember
 ~thorn          months later and i cant remember what this is for...
 
 latest update
+- modifier + set component left/right margin -> keep width
 - shift+click on the center component button will set both the left margin and the width to match the component
 - run this script to install the tool, rerun this script to uninstall the tool
 
@@ -323,11 +323,17 @@ class GlyphViewMetricsUI(Subscriber):
             baseGlyph = f[sender.getTitle()]
             if baseGlyph is not None:
                 if side == 'left':
-                    with self.glyph.undo('Match Left Margin of ' + baseGlyph.name):
-                        self.glyph.angledLeftMargin = baseGlyph.angledLeftMargin
+                    if NSEvent.modifierFlags() & NSShiftKeyMask:
+                        with self.glyph.undo('Match Left Margin of ' + baseGlyph.name + ' and maintain width'):
+                            w1 = self.glyph.width
+                            self.glyph.angledLeftMargin = baseGlyph.angledLeftMargin
+                            self.glyph.width = w1
+                    else:
+                        with self.glyph.undo('Match Left Margin of ' + baseGlyph.name):
+                            self.glyph.angledLeftMargin = baseGlyph.angledLeftMargin
                 if side == 'right':
                     if NSEvent.modifierFlags() & NSShiftKeyMask:
-                        with self.glyph.undo('Match Right Margin of ' + baseGlyph.name + ' but keep width'):
+                        with self.glyph.undo('Match Right Margin of ' + baseGlyph.name + ' and maintain width'):
                             w1 = self.glyph.width
                             right_diff = baseGlyph.angledRightMargin - self.glyph.angledRightMargin
                             self.glyph.angledLeftMargin += -1 * right_diff

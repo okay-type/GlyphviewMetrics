@@ -6,7 +6,7 @@ This Robofont extension adds a small UI to the bottom of the Glyphview window th
 This extension still needs a better name. It adds a UI to the bottom of the glyphview window to adjust the metrics.
 
 
-<img src="/source/resources/ScreenShot.png" width="444" alt="Glyphview Metrics HUD ScreenShot">
+<img src="/resources/ScreenShot.png" width="666" alt="Glyphview Metrics HUD ScreenShot">
 
 
 ## There are buttons to make quick adjustments:
@@ -74,7 +74,7 @@ You'll see these and they'll make more sense. These are superuseful for checking
 - resizing the window scrambles the ui until the glyph changes
 
 ### latest update
-- holding shift while clicking the set component's right margin button will apply the right margin by shifting the glyph's position (instead of changing the width)
+- holding shift while clicking the set component's left or right margin button will apply the left or right margin but maintain the current width
 
 ### older updates
 - shift+click on the center component button will set both the left margin and the width to match the component
