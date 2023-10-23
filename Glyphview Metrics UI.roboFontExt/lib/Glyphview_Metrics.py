@@ -4,6 +4,7 @@ from mojo.subscriber import listRegisteredSubscribers
 
 import merz
 from mojo.subscriber import Subscriber, registerGlyphEditorSubscriber, unregisterGlyphEditorSubscriber, registerSubscriberEvent
+from lib.UI.glyphMetricsEditText import GlyphMetricsEditText
 
 unit = 5
 h = 15
@@ -48,7 +49,8 @@ thorn@l         same as above, but lazier
 thorn.@l        the things above things stack, useful if you can remember
 ~thorn          months later and i cant remember what this is for...
 
-latest update
+latest updates
+- text fields are now GlyphMetricsEditText fields, so you can use up/down arrows to adjust values
 - modifier + set component left/right margin -> keep width
 - shift+click on the center component button will set both the left margin and the width to match the component
 - run this script to install the tool, rerun this script to uninstall the tool
@@ -615,7 +617,7 @@ class mButton(Button):
         super(mButton, self).__init__(*args, **kwargs)
 
 
-class mEditText(EditText):
+class mEditText(GlyphMetricsEditText):
     def __init__(self, *args, **kwargs):
         self.side = kwargs['side']
         del kwargs['side']
