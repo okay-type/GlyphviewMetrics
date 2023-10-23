@@ -6,7 +6,8 @@ This Robofont extension adds a small UI to the bottom of the Glyphview window th
 This extension still needs a better name. It adds a UI to the bottom of the glyphview window to adjust the metrics.
 
 
-<img loading="lazy" width="666" src="/blob/master/resources/ScreenShot.png" alt="Glyphview Metrics HUD ScreenShot" />
+![Glyphview Metrics HUD ScreenShot](resources/ScreenShot.png)
+
 
 ## There are buttons to make quick adjustments:
 
