@@ -74,10 +74,11 @@ You'll see these and they'll make more sense. These are superuseful for checking
 ### needs to be fixed
 - resizing the window scrambles the ui until the glyph changes
 
-### latest update
-- holding shift while clicking the set component's left or right margin button will apply the left or right margin but maintain the current width
+### latest update (v2.2)
+- text fields are now GlyphMetricsEditText fields, so you can use up/down arrows to adjust values
 
 ### older updates
+- holding shift while clicking the set component's left or right margin button will apply the left or right margin but maintain the current width
 - shift+click on the center component button will set both the left margin and the width to match the component
 - run this script to install the tool, rerun this script to uninstall the tool
 - in the width: field
@@ -102,7 +103,6 @@ You'll see these and they'll make more sense. These are superuseful for checking
 - tweak icons' sizepos
 - added textShouldEndEditing_ to EditText fields so I stop accidently changing things
 - can we unset focus after pressing return (needs testing)
-
 
 
 

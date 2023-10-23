@@ -49,35 +49,6 @@ thorn@l         same as above, but lazier
 thorn.@l        the things above things stack, useful if you can remember
 ~thorn          months later and i cant remember what this is for...
 
-latest updates
-- text fields are now GlyphMetricsEditText fields, so you can use up/down arrows to adjust values
-- modifier + set component left/right margin -> keep width
-- shift+click on the center component button will set both the left margin and the width to match the component
-- run this script to install the tool, rerun this script to uninstall the tool
-
-older updates
-- in the width: field
-    prefix a glyphname with ~ to proportioanlly match it's left and right margins
-    so a if glyphname 'x' has 50-500-25, typing ~x in a 600upm wide glyph will give 60-600-30 (left-width-right)
-- you can tab through the fields but changing a value will exit back to the glyph edit view
-    - hopefully fixes accidental double changes and annoying drag-to-change accidents
-- added buttons to match the metrics for *left and *right glyphs (i.e. parenleft-parenright)
-- repositions center group on window resize (currently needs a glyph change to trigger)
-- round displayed values to one decimals (works better for italics)
-- right-align text fields for tighter layout
-- lazy suffix completion with "."
-    - entering '.' in a field will try to match the current glyph suffix
-    - using 'R.' in a 'Racute.suffix' glyph will automatically use 'R.suffix'
-    - this works with the @ syntax 'h.@l' will get the left margin of 'h.suffix'
-- oops, broke the center in width button (=). fixed
-- target which glyph metrics using glyphname@left shorthand
-    - values are @left @right @width or @l @r @w if you're in a hurry
-- even lazier, using '?' will use the current glyph name
-    - good for nonalpha glyphs like numbers: '?@r' in a six will use the right side of 'six'
-- color purple if component sidebearings equal the opposite side
-- tweak icons' sizepos
-- added textShouldEndEditing_ to EditText fields so I stop accidently changing things
-- can we unset focus after pressing return (needs testing)
 '''
 
 class GlyphViewMetricsUI(Subscriber):
