@@ -1,5 +1,5 @@
 from vanilla import *
-from AppKit import NSColor, NSAttributedString, NSForegroundColorAttributeName, NSFontAttributeName, NSFont, NSTextAlignmentLeft, NSTextAlignmentRight, NSTextAlignmentCenter, NSBaselineOffsetAttributeName, NSParagraphStyleAttributeName, NSParagraphStyle, NSMutableParagraphStyle, NSEvent, NSShiftKeyMask
+from AppKit import NSColor, NSAttributedString, NSForegroundColorAttributeName, NSFontAttributeName, NSFont, NSTextAlignmentLeft, NSTextAlignmentRight, NSTextAlignmentCenter, NSBaselineOffsetAttributeName, NSParagraphStyleAttributeName, NSParagraphStyle, NSMutableParagraphStyle, NSEvent, NSShiftKeyMask, NSAlternateKeyMask
 from mojo.subscriber import listRegisteredSubscribers
 
 import merz
@@ -49,6 +49,11 @@ thorn@l         same as above, but lazier
 thorn.@l        the things above things stack, useful if you can remember
 ~thorn          months later and i cant remember what this is for...
 
+
+component button modifiers
+---
+shift down      copy baseglyph value but mantain current width
+option down     copy the opposite side's baseglyph value (left->right, right->left)
 '''
 
 class GlyphViewMetricsUI(Subscriber):
@@ -253,7 +258,7 @@ class GlyphViewMetricsUI(Subscriber):
         if '?' in sourceG:
             sourceG = sourceG.replace('?', self.glyph.name)
         if sourceG not in font.glyphOrder:
-            print('sourceG not in font.glyphOrder', no, sourceG, sourceSide)
+            print('Glyph Edit View Metrics UI : sourceG not in font.glyphOrder', no, sourceG, sourceSide)
             return None
         if sourceSide == 'left' or sourceSide == 'l':
             metric = font[sourceG].angledLeftMargin
@@ -301,6 +306,9 @@ class GlyphViewMetricsUI(Subscriber):
                             w1 = self.glyph.width
                             self.glyph.angledLeftMargin = baseGlyph.angledLeftMargin
                             self.glyph.width = w1
+                    elif NSEvent.modifierFlags() & NSAlternateKeyMask:
+                        with self.glyph.undo('Match Right Margin of ' + baseGlyph.name + ' on left side'):
+                            self.glyph.angledLeftMargin = baseGlyph.angledRightMargin
                     else:
                         with self.glyph.undo('Match Left Margin of ' + baseGlyph.name):
                             self.glyph.angledLeftMargin = baseGlyph.angledLeftMargin
@@ -313,6 +321,9 @@ class GlyphViewMetricsUI(Subscriber):
                             self.glyph.angledRightMargin += right_diff
                             if self.glyph.width != w1:
                                 self.glyph.width = w1
+                    elif NSEvent.modifierFlags() & NSAlternateKeyMask:
+                        with self.glyph.undo('Match Left Margin of ' + baseGlyph.name + ' on right side'):
+                            self.glyph.angledRightMargin = baseGlyph.angledLeftMargin
                     else:
                         with self.glyph.undo('Match Right Margin of ' + baseGlyph.name):
                             self.glyph.angledRightMargin = baseGlyph.angledRightMargin
@@ -548,12 +559,12 @@ class GlyphViewMetricsUI(Subscriber):
             textcolor = NSColor.colorWithCalibratedRed_green_blue_alpha_(.8, 0, 0, .6)
             # customFont = NSFont.fontWithName_size_('SFMono-RegularItalic', fontSize)
 
-        alignment = 2  ## 0=left, 1=right, 2=center, 3=justified
+        alignment = 1  ## 0=left, 2=right, 1=center, 3=justified
         if this.action == 'component' or this.action == 'leftright':
             if this.side == 'left':
                 alignment = 0
             if this.side == 'right':
-                alignment = 1
+                alignment = 2
 
         paragraphStyle = NSMutableParagraphStyle.alloc().init()
         paragraphStyle.setAlignment_(alignment)
@@ -601,9 +612,9 @@ if __name__ == '__main__':
     if len(registered_subscribers) > 0:
         for target_subscriber in registered_subscribers:
             unregisterGlyphEditorSubscriber(target_subscriber)
-        print('Glyph Edit View Metrics UI Uninstalled')
+        print('Glyph Edit View Metrics UI : Uninstalled')
     else:
         registerGlyphEditorSubscriber(GlyphViewMetricsUI)
-        print('Glyph Edit View Metrics UI Installed')
+        print('Glyph Edit View Metrics UI : Installed')
 
 
